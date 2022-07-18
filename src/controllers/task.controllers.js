@@ -225,9 +225,10 @@ const post_Solicitar_Mantenimiento = async(req,res,next) => {
 				"idEquipo",
 				problema,
 				condicion,
-				descripcion
+				descripcion,
+				fecha
 			)
-				VALUES ($1, $2, $3, $4, $5);
+				VALUES ($1, $2, $3, $4, $5, current_date);
 		`,[
 			generateUUID('infMant-'),
 			equipo.rows[0].idEquipo,
@@ -338,7 +339,7 @@ module.exports = {
 	get_BitacoraCTC_Registros,
 	getAll_Equipos,
 	get_Single_Equipo,
-
+	
 	//	POSTS
 	post_Solicitar_Equipo,
 	post_Solicitar_Mantenimiento,
