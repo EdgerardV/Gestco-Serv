@@ -1,5 +1,5 @@
 const PDFDoc = require('pdfkit-construct');
-const getFechaString = require('../fecha.js');
+const { getFechaString } = require('../fecha.js');
 
 function buildPDF(dataCallback, endCallback, personal){
 	const doc = new PDFDoc({

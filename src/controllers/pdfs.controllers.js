@@ -9,7 +9,7 @@ const solicitudesMantenimientoPDF = require('../utils/PDF/solicitudesMantenimien
 const bitacoraCTCsPDF = require('../utils/PDF/bitacoraCTCsPDF.js')
 
 // Utils
-const getFechaString = require('../utils/fecha.js')
+const { getFechaString } = require('../utils/fecha')
 
 const get_Personal_PDF = async(req,res,next) => {
 	try{
@@ -27,13 +27,14 @@ const get_Personal_PDF = async(req,res,next) => {
 			inner join "Puestos"
 				on "Personal"."idPuesto" = "Puestos"."idPuesto";
 		`);
+		
 		let contentDisposition = `attachment;filename=personal (${getFechaString()}).pdf`
 		const stream = res.writeHead(200,{
 			'Content-Type' : 'application/pdf',
 			'Content-Disposition' : contentDisposition
 		});
 
-		await personalPDF.buildPDF(
+		personalPDF.buildPDF(
 			(chunk) => stream.write(chunk),
 			() => stream.end(),
 			result.rows
